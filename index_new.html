@@ -37,7 +37,7 @@
 	<div class="container">
 
 			<div class="panel panel-default">
-				<div class="panel-heading" id="details_heading">
+				<div class="panel-heading">
 					<h2 class="panel-title">Event Details</h2>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 		  		</div>
@@ -148,19 +148,16 @@
 							collapse the event details panel (see code for expand/collapse in the script tag below),
 							expand the review panel and display the event details for review using appropriate components
 							(https://getbootstrap.com/docs/3.3/components/) -->
-							
-							<button id="finish_button" type ="button" class ="panel panel-default"> Finish</button>
 						</form>
 					</div>
 		  		</div>
 		  	</div>
 			<div class="panel panel-default">
-				<div class="panel-heading" id="review_heading">
+				<div class="panel-heading">
 					<h2 class="panel-title">Review and Confirm</h2>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 		  		</div>
 		  		<div class="panel-body">
-					<span id="review_summary"></span>
 					<!-- display the entered inputs in the event details panel here -->
 					<!-- for each piece of the event info, add an edit button.
 					Clicking on the edit button should expand the event details panel and scroll to the relevant input
@@ -185,72 +182,6 @@
 				$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
 			}
 		});
-
-		$(document).on('click', '#finish_button', function(e) {
-			console.log("fuck");
-			var desc = $('#eventName').val();
-			var date = $('#eventDateTime').val();
-			var html = `<p>Description: ` + desc + `</p>` 
-			+ `<button id="edit_desc" style="display: inline;">Edit</button>`
-			+ `<p>Date: ` + date + '</p>'
-			+ `<button id="edit_date" style="display: inline;">Edit</button>`;
-			$('#review_summary').html(html);
-			collapseEventDetails();
-		});
-
-		$(document).on('click', '#edit_desc', function(e) {
-			collapseEventSummary();
-			expandEventDetails();
-			scrollToElement("eventName");
-		});
-
-		$(document).on('click', '#edit_date', function(e) {
-			collapseEventSummary();
-			expandEventDetails();
-			scrollToElement("eventDateTimeDiv");
-		});
-
-		function scrollToElement(id) {
-			$([document.documentElement, document.body]).animate({
-        		scrollTop: $("#" + id).offset().top
-    		}, 2000);
-		}
-
-		function collapseEventDetails() {
-			var $this = $('#details_heading');
-			if(!$this.hasClass('panel-collapsed')) {
-				$this.parents('.panel').find('.panel-body').slideUp();
-				$this.addClass('panel-collapsed');
-				$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-			} 
-		}
-
-		function expandEventDetails() {
-			var $this = $('#details_heading');
-			if($this.hasClass('panel-collapsed')) {
-				$this.parents('.panel').find('.panel-body').slideDown();
-				$this.removeClass('panel-collapsed');
-				$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-			}
-		}
-
-		function collapseEventSummary() {
-			var $this = $('#review_heading');
-			if(!$this.hasClass('panel-collapsed')) {
-				$this.parents('.panel').find('.panel-body').slideUp();
-				$this.addClass('panel-collapsed');
-				$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-			}
-		}
-
-		function expandEventSummary() {
-			var $this = $('#review_heading');
-			if($this.hasClass('panel-collapsed')) {
-				$this.parents('.panel').find('.panel-body').slideDown();
-				$this.removeClass('panel-collapsed');
-				$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-			}
-		}
 		// all the handling for button clicks go here
     </script>
 </div>
